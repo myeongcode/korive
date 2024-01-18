@@ -30,10 +30,9 @@ function setupRoutes(app) {
   app.post('/upload', (req, res) => {
     console.log(req.file);
 
-    if (!req.file)
-      res.status(404).json({ message: '업로드할 파일이 없습니다!' });
+    if (!req.file) return res.status(404);
 
-    res.status(200).json({ message: '파일을 성공적으로 업로드하였습니다!' });
+    return res.redirect('/home');
   });
 
   //다음 코드 위에다가 넣어야 get, post인식을 함

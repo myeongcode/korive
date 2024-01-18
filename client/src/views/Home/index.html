@@ -19,26 +19,8 @@
     </script>
     <div id="header-div"></div>
     <div class="container">
-      <div class="flex-container">
-        <div class="card">
-          <img class="card-image" src="src/assets/card/thumb-mock.jpg" alt="" />
-          <div class="card-container">
-            <div class="card-author">
-              <img
-                class="card-author-icon"
-                src="src/assets/user/avatar.png"
-                alt=""
-              />
-            </div>
-            <div class="card-info">
-              <h3 class="card-title">
-                ㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㅁㄴㅇㅁㄴㅇfasdfasdfasdfasdf
-              </h3>
-              <p class="card-author-name">우명규</p>
-              <p class="card-views">조회수 5,100</p>
-            </div>
-          </div>
-        </div>
+      <button id="create-post">버튼</button>
+      <div id="card-list" class="flex-container">
         <div class="card">
           <img class="card-image" src="src/assets/card/thumb-mock.jpg" alt="" />
           <div class="card-container">
@@ -61,5 +43,28 @@
       </div>
     </div>
     <script src="src/components/header/header.js"></script>
+    <script>
+      const addBtn = document.querySelector('#create-post');
+      const cardContainer = document.querySelector('#card-list');
+      const content =
+        '<img class="card-image" src="src/assets/card/thumb-mock.jpg" alt="" />' +
+        '<div class="card-container">' +
+        '<div class="card-author">' +
+        '<img class="card-author-icon" src="src/assets/user/avatar.png" alt="" />' +
+        '</div>' +
+        '<div class="card-info">' +
+        '<h3 class="card-title">ㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㅁㄴㅇㅁㄴㅇFasdfasd fasdfasdf</h3>' +
+        '<p class="card-author-name">우명규</p>' +
+        '<p class="card-views">조회수 5,100</p>' +
+        '</div>' +
+        '</div>';
+
+      addBtn.addEventListener('click', () => {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = content;
+        tempDiv.className = 'card';
+        cardContainer.appendChild(tempDiv);
+      });
+    </script>
   </body>
 </html>

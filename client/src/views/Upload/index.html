@@ -18,7 +18,13 @@
     <div id="header-div"></div>
     <h1>파일 등록하기</h1>
     <form action="/upload" method="post" enctype="multipart/form-data">
-      <input type="file" name="fileInput" id="fileInput" />
+      <input
+        type="file"
+        name="fileInput"
+        id="fileInput"
+        accept="image/*"
+        required
+      />
       <button type="submit">Upload File</button>
     </form>
 
