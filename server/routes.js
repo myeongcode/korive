@@ -3,22 +3,23 @@ const { path } = require('./modules');
 function setupRoutes(app) {
   //get
   app.get('/', (req, res) => {
-    res.sendFile(path.resolve('client', 'index.html'));
+    res.render('index.ejs');
+    //res.sendFile(path.resolve('client', 'index.ejs'));
   });
 
   app.get('/home', (req, res) => {
-    res.sendFile(path.resolve('client', 'src', 'views', 'Home', 'index.html'));
+    res.render('Home/index.ejs');
   });
 
-  app.get('/login', (req, res) => {
-    res.sendFile(path.resolve('client', 'src', 'views', 'Login', 'index.html'));
-  });
+  // app.get('/login', (req, res) => {
+  //   res.sendFile(path.resolve('client', 'src', 'views', 'Login', 'index.html'));
+  // });
 
-  app.get('/profile', (req, res) => {
-    res.sendFile(
-      path.resolve('client', 'src', 'views', 'Account', 'index.html')
-    );
-  });
+  // app.get('/profile', (req, res) => {
+  //   res.sendFile(
+  //     path.resolve('client', 'src', 'views', 'Account', 'index.html')
+  //   );
+  // });
 
   app.get('/upload', (req, res) => {
     res.sendFile(

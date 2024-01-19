@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/styles/globals.css" />
+    <link rel="stylesheet" href="/src/components/header/header.css" />
+    <link rel="stylesheet" href="/src/views/Home/styles/main.css" />
+    <title>Korive</title>
+  </head>
+  <body>
+    <div id="header-div"></div>
+    <div class="container">
+      <div id="card-list" class="flex-container"></div>
+    </div>
+    <script>
+      fetch('/src/components/header/header.html')
+        .then((res) => res.text())
+        .then((html) => {
+          document.querySelector('#header-div').innerHTML = html;
+        });
+    </script>
+    <script>
+      const videos = [
+        {
+          id: 1,
+          title: '영상1',
+          author: '김진성',
+          views: 4103,
+          imageUrl: 'src/assets/card/thumb-mock.jpg',
+        },
+        {
+          id: 2,
+          title: '영상2',
+          author: '안정수',
+          views: 331,
+          imageUrl: 'src/assets/card/thumb-mock.jpg',
+        },
+        {
+          id: 3,
+          title: '영상3',
+          author: '우명규',
+          views: 88881,
+          imageUrl: 'src/assets/card/thumb-mock.jpg',
+        },
+      ];
+      const cardContainer = document.querySelector('#card-list');
+
+      let videosHtml = '';
+      for (var i = 0; i < videos.length; i++) {
+        let video = videos[i];
+        videosHtml +=
+          '<div class="card">' +
+          '<img class="card-image" src="' +
+          video.imageUrl +
+          '" alt="" />' +
+          '<div class="card-container">' +
+          '<div class="card-author">' +
+          '<img class="card-author-icon" src="src/assets/user/avatar.png" alt="" />' +
+          '</div>' +
+          '<div class="card-info">' +
+          '<h3 class="card-title">' +
+          video.title +
+          '</h3>' +
+          '<p class="card-author-name">' +
+          video.author +
+          '</p>' +
+          '<p class="card-views"> 조회수 ' +
+          video.views +
+          '</p>' +
+          '</div>' +
+          '</div>' +
+          '</div>';
+      }
+
+      cardContainer.innerHTML = videosHtml;
+    </script>
+    <script src="/src/components/header/header.js"></script>
+  </body>
+</html>

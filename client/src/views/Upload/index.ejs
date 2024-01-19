@@ -3,18 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="src/styles/globals.css" />
-    <link rel="stylesheet" href="src/components/header/header.css" />
+    <link rel="stylesheet" href="/src/styles/globals.css" />
+    <link rel="stylesheet" href="/src/components/header/header.css" />
     <title>Korive</title>
   </head>
   <body>
-    <script>
-      fetch('src/components/header/header.html')
-        .then((response) => response.text())
-        .then((html) => {
-          document.querySelector('#header-div').innerHTML = html;
-        });
-    </script>
     <div id="header-div"></div>
     <h1>파일 등록하기</h1>
     <form action="/upload" method="post" enctype="multipart/form-data">
@@ -27,7 +20,13 @@
       />
       <button type="submit">Upload File</button>
     </form>
-
-    <script src="src/components/header/header.js"></script>
+    <script>
+      fetch('/src/components/header/header.html')
+        .then((res) => res.text())
+        .then((html) => {
+          document.querySelector('#header-div').innerHTML = html;
+        });
+    </script>
+    <script src="/src/components/header/header.js"></script>
   </body>
 </html>

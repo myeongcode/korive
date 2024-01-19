@@ -18,8 +18,11 @@ function setupMiddleware(app) {
 
   app.use(uploadMiddleware);
   app.use(express.json());
+  app.set('view engine', 'ejs');
+  app.set('views', path.join(__dirname, '../client/src/views'));
   app.use(express.urlencoded({ extended: false }));
   app.use(express.static(path.resolve('client')));
+  app.use('/detail', require('./routes/detail.js'));
 }
 
 module.exports = {
