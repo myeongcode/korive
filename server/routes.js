@@ -1,9 +1,18 @@
-const { path } = require('./modules');
+const { path, axios } = require('./modules');
 
 function setupRoutes(app) {
   //get
-  app.get('/', (req, res) => {
-    res.render('Home/index.ejs');
+  app.get('/', async (req, res) => {
+    try {
+      const getVideoAPI = 'http://localhost:8080/api/videos';
+      const response = await axios.get(getVideoAPI);
+      res.render('Home/index.ejs', {
+        data: response.data,
+      });
+    } catch (e) {
+      console.error('Error fetching data from API : ', e);
+      res.status(500).send('Internal Server Error');
+    }
   });
 
   // app.get('/home', (req, res) => {

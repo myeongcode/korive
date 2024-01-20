@@ -9,55 +9,32 @@
     <title>Korive</title>
   </head>
   <body>
-    <div onclick=""></div>
     <%- include('../components/header/header.html') %>
     <div class="container">
-      <div id="card-list" class="flex-container"></div>
+      <div id="card-list" class="flex-container">
+        <% for(let i=0; i < data.length; i++) { %>
+        <div class="card" onclick="navigateToDetail('<%= data[i].id %>')">
+          <img class="card-image" src="<%= data[i].imageUrl %>" alt="" />
+          <div class="card-container">
+            <div class="card-author">
+              <img
+                class="card-author-icon"
+                src="/src/assets/user/avatar.png"
+                alt=""
+              />
+            </div>
+            <div class="card-info">
+              <h3 class="card-title"><%= data[i].title %></h3>
+              <p class="card-author-name"><%= data[i].author %></p>
+              <p class="card-views">조회수 <%= data[i].views %></p>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </div>
     </div>
     <script>
       const cardContainer = document.querySelector('#card-list');
-      const videosDataUrl = '/api/videos';
-
-      async function getVideoData(url = '') {
-        const response = await fetch(url)
-          .then((res) => res.json())
-          .then((data) => data);
-        return response;
-      }
-
-      const promiseData = getVideoData(videosDataUrl);
-
-      promiseData.then((videosData) => {
-        let videosHTML = '';
-        for (let i = 0; i < videosData.length; i++) {
-          let video = videosData[i];
-          videosHTML +=
-            '<div class="card" onclick="navigateToDetail(' +
-            video.id +
-            ')">' +
-            '<img class="card-image" src="' +
-            video.imageUrl +
-            '" alt="" />' +
-            '<div class="card-container">' +
-            '<div class="card-author">' +
-            '<img class="card-author-icon" src="src/assets/user/avatar.png" alt="" />' +
-            '</div>' +
-            '<div class="card-info">' +
-            '<h3 class="card-title">' +
-            video.title +
-            '</h3>' +
-            '<p class="card-author-name">' +
-            video.author +
-            '</p>' +
-            '<p class="card-views"> 조회수 ' +
-            video.views +
-            '</p>' +
-            '</div>' +
-            '</div>' +
-            '</div>';
-        }
-        cardContainer.innerHTML = videosHTML;
-      });
 
       function navigateToDetail(idx) {
         const detailUrl = '/detail/' + idx;
