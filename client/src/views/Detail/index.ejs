@@ -4,19 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/src/styles/globals.css" />
-    <link rel="stylesheet" href="/src/components/header/header.css" />
+    <link rel="stylesheet" href="/src/views/components/header/header.css" />
     <title>비디오 상세페이지</title>
   </head>
   <body>
-    <div id="header-div"></div>
-    <h1 id="video-id"><%= id %></h1>
-    <script>
-      fetch('/src/components/header/header.html')
-        .then((res) => res.text())
-        .then((html) => {
-          document.querySelector('#header-div').innerHTML = html;
-        });
-    </script>
-    <script src="/src/components/header/header.js"></script>
+    <%- include('../components/header/header.html') %>
+    <img src="<%= data.imageUrl %>" alt="" />
+    <h1 id="video-id"><%= data.title %></h1>
+    <div><%= data.author %></div>
+    <div><%= data.views %></div>
+    <script src="/src/views/components/header/header.js"></script>
   </body>
 </html>

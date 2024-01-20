@@ -4,6 +4,6 @@ function navigateToUpload() {
 }
 
 function navigateToHome() {
-  const homeURL = '/home';
+  const homeURL = '/';
   location.href = homeURL;
 }

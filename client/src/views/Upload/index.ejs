@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/src/styles/globals.css" />
-    <link rel="stylesheet" href="/src/components/header/header.css" />
+    <link rel="stylesheet" href="/src/views/components/header/header.css" />
     <title>Korive</title>
   </head>
   <body>
-    <div id="header-div"></div>
+    <%- include('../components/header/header.html') %>
     <h1>파일 등록하기</h1>
     <form action="/upload" method="post" enctype="multipart/form-data">
       <input
@@ -20,13 +20,6 @@
       />
       <button type="submit">Upload File</button>
     </form>
-    <script>
-      fetch('/src/components/header/header.html')
-        .then((res) => res.text())
-        .then((html) => {
-          document.querySelector('#header-div').innerHTML = html;
-        });
-    </script>
-    <script src="/src/components/header/header.js"></script>
+    <script src="/src/views/components/header/header.js"></script>
   </body>
 </html>

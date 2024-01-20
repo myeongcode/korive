@@ -3,13 +3,12 @@ const { path } = require('./modules');
 function setupRoutes(app) {
   //get
   app.get('/', (req, res) => {
-    res.render('index.ejs');
-    //res.sendFile(path.resolve('client', 'index.ejs'));
-  });
-
-  app.get('/home', (req, res) => {
     res.render('Home/index.ejs');
   });
+
+  // app.get('/home', (req, res) => {
+  //   res.render('Home/index.ejs');
+  // });
 
   // app.get('/login', (req, res) => {
   //   res.sendFile(path.resolve('client', 'src', 'views', 'Login', 'index.html'));
@@ -22,9 +21,7 @@ function setupRoutes(app) {
   // });
 
   app.get('/upload', (req, res) => {
-    res.sendFile(
-      path.resolve('client', 'src', 'views', 'Upload', 'index.html')
-    );
+    res.render('Upload/index.ejs');
   });
 
   //post
@@ -34,6 +31,33 @@ function setupRoutes(app) {
     if (!req.file) return res.status(404);
 
     return res.redirect('/home');
+  });
+
+  //api
+  app.get('/api/videos', (req, res) => {
+    res.status(200).json([
+      {
+        id: 1,
+        title: '영상1',
+        author: '김진성',
+        views: 4103,
+        imageUrl: '/src/assets/card/thumb-mock.jpg',
+      },
+      {
+        id: 2,
+        title: '영상2',
+        author: '안정수',
+        views: 331,
+        imageUrl: '/src/assets/card/thumb-mock.jpg',
+      },
+      {
+        id: 3,
+        title: '영상3',
+        author: '우명규',
+        views: 88881,
+        imageUrl: '/src/assets/card/thumb-mock.jpg',
+      },
+    ]);
   });
 
   //다음 코드 위에다가 넣어야 get, post인식을 함
