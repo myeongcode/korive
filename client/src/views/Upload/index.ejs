@@ -11,13 +11,9 @@
     <%- include('../components/header/header.html') %>
     <h1>파일 등록하기</h1>
     <form action="/upload" method="post" enctype="multipart/form-data">
-      <input
-        type="file"
-        name="fileInput"
-        id="fileInput"
-        accept="image/*"
-        required
-      />
+      <input type="file" name="image" id="image" accept="image/*" required />
+      <input type="text" name="title" />
+      <input type="text" name="description" />
       <button type="submit">Upload File</button>
     </form>
     <script src="/src/views/components/header/header.js"></script>

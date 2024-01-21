@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const axios = require('axios');
 const path = require('path');
+const mariadb = require('./db/mariadb');
 
 const upload = multer({
   storage: multer.diskStorage({
@@ -9,14 +10,18 @@ const upload = multer({
       done(null, file.originalname);
     },
     destination(req, file, done) {
-      done(null, path.join(__dirname, 'uploads'));
+      done(null, path.join('client/src/assets/card'));
     },
   }),
+  limits: {
+    fileSize: 1024 * 1024,
+  },
 });
 
 function setupMiddleware(app) {
-  const uploadMiddleware = upload.single('fileInput');
+  const uploadMiddleware = upload.single('image');
 
+  mariadb.connect();
   app.use(uploadMiddleware);
   app.use(express.json());
   app.set('view engine', 'ejs');
@@ -32,4 +37,5 @@ module.exports = {
   setupMiddleware,
   upload,
   axios,
+  mariadb,
 };

@@ -14,7 +14,7 @@
       <div id="card-list" class="flex-container">
         <% for(let i=0; i < data.length; i++) { %>
         <div class="card" onclick="navigateToDetail('<%= data[i].id %>')">
-          <img class="card-image" src="<%= data[i].imageUrl %>" alt="" />
+          <img class="card-image" src="<%= data[i].imageURL %>" alt="" />
           <div class="card-container">
             <div class="card-author">
               <img
@@ -34,8 +34,6 @@
       </div>
     </div>
     <script>
-      const cardContainer = document.querySelector('#card-list');
-
       function navigateToDetail(idx) {
         const detailUrl = '/detail/' + idx;
         location.href = detailUrl;
