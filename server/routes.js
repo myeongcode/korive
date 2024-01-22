@@ -37,11 +37,42 @@ function setupRoutes(app) {
 
   //post
   app.post('/upload', (req, res) => {
-    console.log(req.file);
+    const title = req.body.title;
+    const description = req.body.description;
+    const filename = req.file.filename;
 
-    if (!req.file) return res.status(404);
+    const getVideosCntQr = `SELECT COUNT(*) AS idCnt FROM videos`;
 
-    return res.redirect('/');
+    function setVideosDataQr(id, title, author, views, imageURL, description) {
+      return `INSERT INTO videos VALUES (${id}, '${title}', '${author}', ${views}, '${imageURL}', '${description}')`;
+    }
+
+    mariadb.query(getVideosCntQr, (err, rows, fields) => {
+      if (!err) {
+        const idCnt = rows[0].idCnt;
+
+        mariadb.query(
+          setVideosDataQr(
+            idCnt + 1,
+            title,
+            'Myeong',
+            40,
+            `/src/assets/thumb/${filename}`,
+            description
+          ),
+          (err, rows, fields) => {
+            if (!err && req.file) {
+              return res.redirect('/');
+            } else {
+              console.error('err : ', err);
+              return res.sta(404);
+            }
+          }
+        );
+      } else {
+        console.error('err : ', err);
+      }
+    });
   });
 
   //api

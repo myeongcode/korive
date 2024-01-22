@@ -7,10 +7,18 @@ const mariadb = require('./db/mariadb');
 const upload = multer({
   storage: multer.diskStorage({
     filename(req, file, done) {
-      done(null, file.originalname);
+      const getVideosCntQr = `SELECT COUNT(*) AS idCnt FROM videos`;
+      mariadb.query(getVideosCntQr, (err, rows, fields) => {
+        const idCnt = rows[0].idCnt;
+        const fileEx = file.originalname.split('.')[1];
+
+        if (!err) {
+          done(null, `thumb-${idCnt + 1}.${fileEx}`);
+        }
+      });
     },
     destination(req, file, done) {
-      done(null, path.join('client/src/assets/card'));
+      done(null, path.join('client/src/assets/thumb'));
     },
   }),
   limits: {

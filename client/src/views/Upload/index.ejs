@@ -5,14 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/src/styles/globals.css" />
     <link rel="stylesheet" href="/src/views/components/header/header.css" />
+    <link rel="stylesheet" href="./styles/upload.css" />
     <title>Korive</title>
   </head>
   <body>
     <%- include('../components/header/header.html') %>
     <h1>파일 등록하기</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
+    <form
+      class="container"
+      action="/upload"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <h4 for="image">썸네일 등록</h4>
       <input type="file" name="image" id="image" accept="image/*" required />
-      <input type="text" name="title" />
+      <h4>영상 제목</h4>
+      <input type="text" name="title" required />
+      <h4>영상 설명</h4>
       <input type="text" name="description" />
       <button type="submit">Upload File</button>
     </form>
