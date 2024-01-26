@@ -9,7 +9,10 @@
   </head>
   <body>
     <%- include('../components/header/header.html') %>
-    <img src="<%= data.imageURL %>" alt="" />
+    <img width="700px" src="<%= data.imageURL %>" alt="" />
+    <video controls width="700">
+      <source src="<%= data.videoURL %>" />
+    </video>
     <h1 id="video-id"><%= data.title %></h1>
     <h5 id="video-id"><%= data.description %></h5>
     <div><%= data.author %></div>

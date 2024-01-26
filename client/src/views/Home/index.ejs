@@ -33,6 +33,26 @@
         <% } %>
       </div>
     </div>
+    <!-- <script>
+      const getVideoAPIUrl = 'http://localhost:8080/api/videos';
+      try {
+        const data = getData().then((res) => console.log(res));
+      } catch (e) {
+        console.error('err : ', e);
+      }
+
+      async function getData() {
+        const response = await fetch(getVideoAPIUrl)
+          .then((raw) => raw.json())
+          .then((res) => res);
+        return response;
+      }
+
+      function navigateToDetail(idx) {
+        const detailUrl = '/detail/' + idx;
+        location.href = detailUrl;
+      }
+    </script> -->
     <script>
       function navigateToDetail(idx) {
         const detailUrl = '/detail/' + idx;

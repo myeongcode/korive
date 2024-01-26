@@ -1,4 +1,4 @@
-const { path, axios, mariadb } = require('./modules');
+const { path, axios, mariadb, upload, fs } = require('./modules');
 
 function setupRoutes(app) {
   //get
@@ -15,20 +15,6 @@ function setupRoutes(app) {
     }
   });
 
-  // app.get('/home', (req, res) => {
-  //   res.render('Home/index.ejs');
-  // });
-
-  // app.get('/login', (req, res) => {
-  //   res.sendFile(path.resolve('client', 'src', 'views', 'Login', 'index.html'));
-  // });
-
-  // app.get('/profile', (req, res) => {
-  //   res.sendFile(
-  //     path.resolve('client', 'src', 'views', 'Account', 'index.html')
-  //   );
-  // });
-
   app.get('/upload', (req, res) => {
     res.render('Upload/index.ejs');
   });
@@ -37,40 +23,50 @@ function setupRoutes(app) {
 
   //post
   app.post('/upload', (req, res) => {
+    const uploadUrl = path.join('/server/data');
+
     const title = req.body.title;
     const description = req.body.description;
-    const filename = req.file.filename;
+    const imageFile = req.files['image'][0];
+    const videoFile = req.files['video'][0];
 
     const getVideosCntQr = `SELECT COUNT(*) AS idCnt FROM videos`;
-
-    function setVideosDataQr(id, title, author, views, imageURL, description) {
-      return `INSERT INTO videos VALUES (${id}, '${title}', '${author}', ${views}, '${imageURL}', '${description}')`;
+    function setVideosDataQr(
+      id,
+      title,
+      author,
+      views,
+      imageURL,
+      description,
+      videoURL
+    ) {
+      return `INSERT INTO videos VALUES (${id}, '${title}', '${author}', ${views}, '${imageURL}', '${description}', '${videoURL}')`;
     }
 
     mariadb.query(getVideosCntQr, (err, rows, fields) => {
       if (!err) {
         const idCnt = rows[0].idCnt;
-
         mariadb.query(
           setVideosDataQr(
             idCnt + 1,
             title,
             'Myeong',
             40,
-            `/src/assets/thumb/${filename}`,
-            description
+            `${uploadUrl}/${idCnt + 1}/${imageFile.filename}`,
+            description,
+            `${uploadUrl}/${idCnt + 1}/${videoFile.filename}`
           ),
           (err, rows, fields) => {
-            if (!err && req.file) {
+            if (!err && req.files) {
               return res.redirect('/');
             } else {
-              console.error('err : ', err);
-              return res.sta(404);
+              console.error('query err : ', err);
+              return res.status(404);
             }
           }
         );
       } else {
-        console.error('err : ', err);
+        console.error('DBerr : ', err);
       }
     });
   });
